@@ -71,7 +71,7 @@ def manual_mode():
         print("#---------------------------------------")
         print(f"A 점수: {score_a}")
         print(f"B 점수: {score_b}")
-        print(f"연산 시간(평균/{ITERATIONS}회): {avg_ms:.3f} ms")
+        print(f"연산 시간(평균/{ITERATIONS}회): {avg_ms:.6f} ms")
         print(f"판정: {'A' if score_a > score_b else 'B'}")
     else:
         print("#---------------------------------------")
@@ -79,5 +79,5 @@ def manual_mode():
         print("#---------------------------------------")
         print(f"A 점수: {score_a}")
         print(f"B 점수: {score_b}")
-        print(f"연산 시간(평균/{ITERATIONS}회): {avg_ms:.3f} ms")
+        print(f"연산 시간(평균/{ITERATIONS}회): {avg_ms:.6f} ms")
         print(f"판정: 판정 불가 (|A-B| < {EPSILON})")
