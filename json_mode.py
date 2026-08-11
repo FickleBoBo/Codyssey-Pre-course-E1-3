@@ -1,6 +1,12 @@
 import json
 
-from mac_core import ITERATIONS, is_tie, mac, measure_mac_avg_ms, validate_matrix_pair
+from mac_core import (
+    ITERATIONS,
+    is_tie,
+    mac_test,
+    measure_mac_avg_ms,
+    validate_matrix_pair,
+)
 from optimize_1d import flatten, measure_mac_1d_avg_ms
 
 DATA_FILE = "data.json"
@@ -85,8 +91,8 @@ def json_mode():
 
             validate_matrix_pair(pattern_input, filter_pair["Cross"])
             validate_matrix_pair(pattern_input, filter_pair["X"])
-            score_cross = mac(pattern_input, filter_pair["Cross"])
-            score_x = mac(pattern_input, filter_pair["X"])
+            score_cross = mac_test(pattern_input, filter_pair["Cross"])
+            score_x = mac_test(pattern_input, filter_pair["X"])
 
             if size_key not in perf_samples:
                 perf_samples[size_key] = (pattern_input, filter_pair)

@@ -31,6 +31,16 @@ def mac(matrix1, matrix2):
     return sum(matrix1[i][j] * matrix2[i][j] for i in range(size) for j in range(size))
 
 
+def mac_test(matrix1, matrix2):
+    total = 0.0
+    size = len(matrix1)
+    for i in range(size):
+        for j in range(size):
+            total += matrix1[i][j] * matrix2[i][j]
+
+    return total
+
+
 def measure_mac_avg_ms(matrix1, matrix2):
     start_time = time.perf_counter()
     for _ in range(ITERATIONS):
