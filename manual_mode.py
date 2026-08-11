@@ -1,4 +1,5 @@
 from mac_core import EPSILON, ITERATIONS, is_tie, mac, measure_mac_avg_ms
+from pattern_generator import generate_cross, generate_x
 
 
 def read_n_by_n(n):
@@ -42,8 +43,20 @@ def manual_mode():
     print("# [2] 패턴 입력")
     print("#---------------------------------------")
 
-    print("패턴 (3줄 입력, 공백 구분)")
-    pattern = read_n_by_n(3)
+    print("패턴 선택 (1: +, 2: X, 3: 사용자 지정 패턴)")
+    while True:
+        choice = input("선택: ").strip()
+        if choice in ("1", "2", "3"):
+            break
+        print("잘못된 선택입니다. 1, 2, 3 중 하나를 입력하세요.")
+
+    if choice == "1":
+        pattern = generate_cross(3)
+    elif choice == "2":
+        pattern = generate_x(3)
+    else:
+        print("패턴 (3줄 입력, 공백 구분)")
+        pattern = read_n_by_n(3)
     print()
 
     score_a = mac(pattern, filter_a)
