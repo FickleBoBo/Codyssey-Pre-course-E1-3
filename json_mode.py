@@ -1,6 +1,7 @@
 import json
 
 from mac_core import ITERATIONS, is_tie, mac, measure_mac_avg_ms, validate_matrix_pair
+from optimize_1d import flatten, measure_mac_1d_avg_ms
 
 DATA_FILE = "data.json"
 
@@ -135,13 +136,22 @@ def json_mode():
             measure_mac_avg_ms(pattern_input, filter_pair["Cross"])
             + measure_mac_avg_ms(pattern_input, filter_pair["X"])
         ) / 2
-        perf_targets.append((n, avg_ms))
 
-    print(f"{'크기':>13}{'평균 시간(ms)':>14}{'연산 횟수':>13}")
-    print("-" * 40)
-    for n, avg_ms in perf_targets:
+        flat_pattern = flatten(pattern_input)
+        flat_cross = flatten(filter_pair["Cross"])
+        flat_x = flatten(filter_pair["X"])
+        avg_ms_1d = (
+            measure_mac_1d_avg_ms(flat_pattern, flat_cross)
+            + measure_mac_1d_avg_ms(flat_pattern, flat_x)
+        ) / 2
+
+        perf_targets.append((n, avg_ms, avg_ms_1d))
+
+    print(f"{'크기':>15}{'평균 시간(ms)':>15}{'1D 평균(ms)':>15}{'연산 횟수':>15}")
+    print("-" * 60)
+    for n, avg_ms, avg_ms_1d in perf_targets:
         size_label = f"{n}x{n}"
-        print(f"{size_label:>13}{avg_ms:>14.3f}{n * n:>13}")
+        print(f"{size_label:>15}{avg_ms:>15.6f}{avg_ms_1d:>15.6f}{n * n:>15}")
     print()
 
     print("#---------------------------------------")
